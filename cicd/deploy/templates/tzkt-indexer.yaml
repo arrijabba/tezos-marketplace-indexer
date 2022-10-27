@@ -104,7 +104,12 @@ spec:
               mountPath: /app/appsettings.json
               subPath: appsettings.json
           resources:
-            {{- toYaml .Values.tzkt.indexer.resources | nindent 12 }}
+            limits:
+              cpu: '2'
+              memory: 2Gi
+            requests:
+              cpu: '2'
+              memory: 384Mi
       volumes:
         - name: tzkt-config
           configMap:
