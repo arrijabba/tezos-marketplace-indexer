@@ -96,10 +96,10 @@ tzkt:
       tag: 1.10.0
     resources:
       limits:
-        cpu: 400m
+        cpu: '2'
         memory: 2Gi
       requests:
-        cpu: 200m
+        cpu: '2'
         memory: 384Mi
   network: mainnet
   service:
