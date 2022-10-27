@@ -42,7 +42,7 @@ spec:
       labels:
         app: tzkt
     spec:
-      nodeSelector: 
+      nodeSelector:
         env: {{ include "app.env" . | quote }}
       containers:
         - image: "{{ .Values.tzkt.api.image.repository }}:{{ .Values.tzkt.api.image.tag }}"
@@ -104,12 +104,7 @@ spec:
               mountPath: /app/appsettings.json
               subPath: appsettings.json
           resources:
-            limits:
-              cpu: '2'
-              memory: 2Gi
-            requests:
-              cpu: '2'
-              memory: 384Mi
+            {{- toYaml .Values.tzkt.indexer.resources | nindent 12 }}
       volumes:
         - name: tzkt-config
           configMap:

@@ -19,7 +19,7 @@ tezos-marketplace-indexer-rarible:
     "run"
     ]
   replicas: 1
-  environments: 
+  environments:
     TZKT_URL: http://tzkt:5000
     NETWORK: mainnet
 
@@ -96,10 +96,10 @@ tzkt:
       tag: 1.10.0
     resources:
       limits:
-        cpu: '2'
+        cpu: 400m
         memory: 2Gi
       requests:
-        cpu: '2'
+        cpu: 200m
         memory: 384Mi
   network: mainnet
   service:
