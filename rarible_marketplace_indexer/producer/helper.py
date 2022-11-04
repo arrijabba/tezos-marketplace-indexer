@@ -46,7 +46,7 @@ async def signal_collection_post_save(
 ) -> None:
     from rarible_marketplace_indexer.types.rarible_api_objects.collection.factory import RaribleApiCollectionFactory
 
-    await producer_send(RaribleApiCollectionFactory.build(instance))
+    await producer_send(RaribleApiCollectionFactory.build(instance, None))
 
 
 @post_save(Activity)

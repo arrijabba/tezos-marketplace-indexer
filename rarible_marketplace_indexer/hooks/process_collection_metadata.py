@@ -23,7 +23,7 @@ from rarible_marketplace_indexer.types.rarible_api_objects.collection.factory im
 from rarible_marketplace_indexer.utils.rarible_utils import date_pattern
 
 pending_tasks = deque()
-logger = logging.getLogger("collection_metadata")
+logger = logging.getLogger("dipdup.collection_metadata")
 logger.setLevel("INFO")
 
 
@@ -40,9 +40,10 @@ async def process_metadata_for_collection(ctx: HookContext, collection_meta: Col
             collection_meta.metadata_synced = True
             collection_meta.metadata_retries = collection_meta.metadata_retries
             collection_meta.metadata = json.dumps(metadata)
-            # collection = await Collection.get(id=collection_meta.id)
-            # event = RaribleApiCollectionFactory.build(collection)
-            # await producer_send(event)
+            collection = await Collection.get(id=collection_meta.id)
+
+            event = RaribleApiCollectionFactory.build(collection, metadata)
+            await producer_send(event)
             logger.info(
                 f"Successfully saved metadata for {collection_meta.id} "
                 f"(retries {collection_meta.metadata_retries})"
