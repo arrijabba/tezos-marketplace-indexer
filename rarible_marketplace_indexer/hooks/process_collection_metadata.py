@@ -69,7 +69,7 @@ async def process_collection_metadata(
     logger.info("Running collection metadata job")
     index = await IndexingStatus.get_or_none(index=IndexEnum.COLLECTION_METADATA)
     if index is None:
-        transport = AIOHTTPTransport(url=ctx.get_metadata_datasource("metadata").url + "/v1/graphql")
+        transport = AIOHTTPTransport(url="https://metadata.dipdup.net/v1/graphql")
         client = Client(transport=transport, fetch_schema_from_transport=True)
         done = False
         offset = 0
@@ -86,7 +86,7 @@ async def process_collection_metadata(
                         metadata
                       }
                     }
-            """.replace("%network%", os.getenv("NETWORK")).replace("%offset%", str(offset))
+            """.replace("%network%", "mainnet").replace("%offset%", str(offset))
             )
             offset += 1000
             try:

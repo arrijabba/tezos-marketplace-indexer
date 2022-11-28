@@ -1,7 +1,7 @@
 .ONESHELL:
 .DEFAULT_GOAL: all
 
-py := python3 -m
+py := python3.10 -m
 source_dir := rarible_marketplace_indexer
 unit_tests_dir := tests
 
